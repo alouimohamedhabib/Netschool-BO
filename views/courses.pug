@@ -1,0 +1,38 @@
+extends layout
+block styles
+    link(rel='stylesheet' href='/stylesheets/datatable.css')
+block  content
+    h1 Liste of courses
+    a(href="/lessons/new").btn.btn-toolbar.btn-primary
+        i.glyphicon.glyphicon-plus-sign
+        |  create new lesson
+    p &nbsp;
+    p.alert.alert-info  There is #{courses.length} in the Database
+    .panel.panel-default
+        .panel-heading
+            p Liste of courses
+        .panel-body
+            table.table#courses
+                thead
+                    tr
+                        th Title
+                        th Student
+                        th Duration
+                        th Action
+                for result in courses
+                    tr
+                        td #{result.title}
+                        td #{result.student}
+                        td #{result.duration}
+                        td
+                            - var _id = result._id
+                            a(href='/lessons/view/' + _id) View
+                            span  |
+                            a(href='/lessons/edit/' + _id ) Edit
+                            span  |
+                            a(href='/lessons/delete/' + _id ) Delete
+
+block scripting
+
+    script(type='text/javascript' src='/bower_component/datatables.net/js/jquery.dataTables.min.js')
+    script(type='text/javascript' src='/javascripts/lessons-dt.js')

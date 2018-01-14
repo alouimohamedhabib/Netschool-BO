@@ -1,0 +1,27 @@
+extends ../layout
+
+block title
+    each val in lesson
+        //title=val.title
+
+block  content
+    .panel-default.panel
+        .panel-heading
+            h2 #{lesson.title}
+                small.bottom-right
+                    i #{lesson.student} student(s)
+                    span  has enrolled this course
+        .panel-body
+            p Title: #{lesson.title}
+            p Duration: #{lesson.duration}
+            p Date: #
+            b Teacher details
+            br
+            p Teacher name :
+                - var linkTeacher = lesson.teacher._id
+                a(href="/teachers/" + linkTeacher)
+                    |  #{lesson.teacher.name} #{lesson.teacher.lastname}
+            p Phone number: #{lesson.teacher.phone_number}
+            p Date of birth: #{lesson.teacher.date_of_birth}
+
+

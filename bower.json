@@ -1,0 +1,23 @@
+{
+  "name": "Netschool Bo",
+  "homepage": "https://github.com/alouimohamedhabib/bo",
+  "authors": [
+    "Aloui Mohamed Habib <mohamedhabibaloui@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_component",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "datatables": "datatable#^1.10.16",
+    "datatables.net": "^1.10.16"
+  }
+}

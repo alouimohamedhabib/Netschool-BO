@@ -1,0 +1,51 @@
+extends ../layout
+block content
+    - var id = lesson._id
+    - var title = lesson.title
+    - var duration = lesson.duration
+    - var student = lesson.student
+    - var description = lesson.description
+    - var date =  moment(lesson.date).format('DD/MM/YYYY')
+
+    if success
+        .alert.alert-success Record updated
+    if error
+        .alert.alert-danger Something gone wrong
+
+    form.panel-default.panel(method="post")
+        .panel-heading
+            i.glyphicon.glyphicon-eye-open
+            |  Edit:
+        .panel-body
+            .input-group.col-md-8
+                span
+                    p
+                        b  Title
+                input(type=text class="form-control" value="" + title name='title')
+                input(type='hidden' class="form-control" value="" + id name='_id')
+
+            .input-group.col-md-8
+                span
+                    p
+                        b  Duration
+                input(type=text class="form-control" value="" + duration name='duration')
+
+            .input-group.col-md-8
+                span
+                    p
+                        b  Student
+                input(type="number" min="0" class="form-control" value="" + student name='student')
+
+            .input-group.col-md-8
+                span
+                    p
+                        b  Title
+                input(type="date" class="form-control" value="" + date name='date')
+            .input-group.col-md-8
+                span
+                    p
+                        b  Description
+                    textarea(name="description" class='form-control')=description
+            input(type='submit'   value='Save' class='btn btn-primary' )
+
+
