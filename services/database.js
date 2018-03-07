@@ -1,3 +1,6 @@
+/** 
+ * Executed once to create the DB structure
+*/
 var mongoose = require('./connect').mongoose;
 var Lessons = require('./collections').Lessons;
 var Teacher = require('./collections').Teachers;

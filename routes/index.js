@@ -4,12 +4,32 @@ var db = require("../services/connect");
 var teacher = require("../services/collections").Teachers;
 var lessons = require("../services/collections").Lessons;
 
+
+/**
+ * get list of Teachers
+ */
+router.get('/teachers', function (req, res, next) {
+    teacher.find().then(function (teachers) {
+        res.render("teachers/list", {
+            "teachers": teachers
+        })
+    });
+
+})
+router.get('/teachers/new', function (req, res, next) {
+    res.render("teachers/new", {})
+
+})
+
+
+
+
 /**
  * @Todo : When DB server gone away Fix!
  */
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index', { title: 'Express' });
 });
 
 router.get('/lessons', function (req, res, next) {
@@ -26,7 +46,7 @@ router.get('/lessons', function (req, res, next) {
 router.get('/lessons/view/:id', function (req, res, next) {
     const id = req.param("id");
 
-    lessons.findOne({_id: id}).populate('teacher').exec(function (err, data) {
+    lessons.findOne({ _id: id }).populate('teacher').exec(function (err, data) {
         if (err) return handleError(err);
         res.render('lessons/view', {
             lesson: data
@@ -36,7 +56,7 @@ router.get('/lessons/view/:id', function (req, res, next) {
 //edit
 router.get("/lessons/edit/:id", function (req, res, next) {
     var id = req.params.id;
-    lessons.findOne({_id: id}).exec(function (err, data) {
+    lessons.findOne({ _id: id }).exec(function (err, data) {
         res.render('lessons/edit',
             {
                 lesson: data
@@ -59,6 +79,27 @@ router.get("/lessons/new", function (req, res, next) {
 
 //
 
+router.post('/teachers/new', function (req, res, next) {
+    /**
+     * @var teacher Teachers
+     */
+    newteacher = new teacher({
+        //_id: new require("mongoose").Type.ObjectId(), 
+
+        lastname: req.body.lastname,
+        phone_number: req.body.phone_number,
+        date_of_birth: req.body.date_of_birth,
+
+        name: req.body.name,
+
+    })
+    newteacher.save().then(function (teacher) {
+        res.redirect("/teachers")
+    })
+    // res.render();
+
+})
+
 router.post("/lessons/new", function (req, res, next) {
     var Lesson = new lessons({
         // _id: new require("mongoose").Type.ObjectId(),
@@ -78,17 +119,17 @@ router.post("/lessons/new", function (req, res, next) {
 // update lesson
 router.post("/lessons/edit/:id", function (req, res, next) {
     lessons.findByIdAndUpdate(req.body._id, req.body, {}, function (err, record) {
-            if (err)
-                res.render('lessons/edit', {
-                    error: handleError(err)
-                })
-            console.log(record);
-            res.render('lessons/edit',
-                {
-                    success: true,
-                    lesson: record
-                })
-        }
+        if (err)
+            res.render('lessons/edit', {
+                error: handleError(err)
+            })
+        console.log(record);
+        res.render('lessons/edit',
+            {
+                success: true,
+                lesson: record
+            })
+    }
     )
 })
 

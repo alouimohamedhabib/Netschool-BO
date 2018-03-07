@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 // teachers
 var teachers = new Schema(
     {
-        _id: Schema.Types.ObjectId,
+        
         name: {type: String, required: true, index: 1},
         lastname: {type: String, required: true},
         phone_number: {type: String},
@@ -18,7 +18,7 @@ teachers.method.FullName = function () {
     return this.name + ' ' + this.lastname
 }
 // lessons collections
-var lessons = new Schema(
+var lessons = Schema(
     {
         title: {type: String, required: true, index: 1},
         duration: {type: Number, required: true},

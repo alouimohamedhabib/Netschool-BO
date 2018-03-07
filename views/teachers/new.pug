@@ -1,0 +1,42 @@
+extends ../layout
+block content
+
+    if success
+        .alert.alert-success Record updated
+    if error
+        .alert.alert-danger Something gone wrong
+
+    form.panel-default.panel(method="post")
+        .panel-heading
+            i.glyphicon.glyphicon-eye-open
+            |  Edit:
+        .panel-body
+            .input-group.col-md-8
+                span
+                    p
+                        b  Name
+                input(type=text name="name" class="form-control" value="")
+
+
+            .input-group.col-md-8
+                span
+                    p
+                        b Lastname
+                input(type=text name="lastname" class="form-control" value="")
+
+
+            .input-group.col-md-8
+                span
+                    p
+                        b Phone
+                input(type=text name="phone_number" class="form-control" value="")
+
+
+            .input-group.col-md-8
+                span
+                    p
+                        b  Date of birth
+                input(type="date" name="date_of_birth" class="form-control" value="")
+
+
+            input(type='submit'   value='Save' class='btn btn-primary' )

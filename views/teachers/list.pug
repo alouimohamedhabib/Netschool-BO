@@ -1,0 +1,40 @@
+extends ../layout
+block styles
+    link(rel='stylesheet' href='/stylesheets/datatable.css')
+block  content
+    h1 Liste of teachers
+    a(href="/teachers/new").btn.btn-toolbar.btn-primary
+        i.glyphicon.glyphicon-plus-sign
+        |  Add new teacher
+    p &nbsp;
+    p.alert.alert-info  There is #{teachers.length} in the Database
+    .panel.panel-default
+        .panel-heading
+            p Liste of courses
+        .panel-body
+            table.table#courses
+                thead
+                    tr
+                        th Name
+                        th Lastname
+                        th Phone
+                        th Date of birth
+                        th Action
+                for teacher in teachers
+                    tr
+                        td #{teacher.name}
+                        td #{teacher.lastname}
+                        td #{teacher.phone_number}
+                        td #{teacher.date_of_birth}
+                        td
+                            - var _id = teacher._id
+                            a(href='/teachers/view/' + _id) View
+                            span  |
+                            a(href='/teachers/edit/' + _id ) Edit
+                            span  |
+                            a(href='/teachers/delete/' + _id ) Delete
+
+block scripting
+
+    script(type='text/javascript' src='/bower_component/datatables.net/js/jquery.dataTables.min.js')
+    script(type='text/javascript' src='/javascripts/lessons-dt.js')
